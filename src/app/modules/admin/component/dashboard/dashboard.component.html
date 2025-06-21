@@ -1,1 +1,84 @@
-<p>dashboard works 2!</p>
+<form class="w-full max-w-md mx-auto my-4" [formGroup]="searchForm">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Search Tasks</mat-label>
+    <input
+      matInput
+      type="text"
+      formControlName="title"
+      placeholder="Search by title or employee name"
+      (input)="searchTask()"
+      class="bg-white placeholder-gray-400 text-gray-800 px-3 py-2 rounded-md focus:outline-none"
+    />
+  </mat-form-field>
+</form>
+
+
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Task List</h2>
+
+  <div
+    class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <mat-card class="task-card shadow-md" *ngFor="let task of listOfTasks">
+      <div class="task-details p-4 space-y-2">
+        <h2 class="text-lg font-semibold text-indigo-600">{{ task.title }}</h2>
+        <p class="text-gray-600 text-sm">{{ task.description }}</p>
+
+        <mat-divider></mat-divider>
+
+        <div class="task-info space-y-1 text-sm">
+          <div class="flex justify-between">
+            <span class="font-medium text-gray-500">Due Date:</span>
+            <span>{{ task.dueDate | date: "MMM d, y" }}</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="font-medium text-gray-500">Employee:</span>
+            <span>{{ task.employeeName }}</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="font-medium text-gray-500">Priority:</span>
+            <span>{{ task.priority }}</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="font-medium text-gray-500">Status:</span>
+            <span>{{ task.taskStatus }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="flex justify-end space-x-2 pt-2">
+          <!-- <button
+            mat-icon-button
+            color="accent"
+            [routerLink]="'/admin/task-details/' + task.id"
+            matTooltip="View Task"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button> -->
+
+          <a
+            mat-icon-button
+            color="primary"
+            class="update-button"
+            [routerLink]="'/admin/task/' + task.id + '/edit'"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deleteTask(task.id)"
+            matTooltip="Delete Task"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
+import {MatNativeDateModule} from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 @NgModule({
      exports:[
@@ -28,6 +29,7 @@ MatDatepickerModule,
 MatSelectModule,
 MatToolbarModule,
 MatProgressSpinnerModule,
+MatNativeDateModule,
 MatSnackBarModule,
 MatRadioModule,
 MatTableModule,
