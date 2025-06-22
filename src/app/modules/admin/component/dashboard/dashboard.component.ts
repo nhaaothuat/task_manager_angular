@@ -45,7 +45,12 @@ export class DashboardComponent {
   }
 
   searchTask() {
+    this.listOfTasks=[]
     const title = this.searchForm.get('title')!.value;
     console.log(title);
+    this.service.searchTask(title).subscribe((res)=>{
+      console.log(res)
+      this.listOfTasks=res;
+    })
   }
 }

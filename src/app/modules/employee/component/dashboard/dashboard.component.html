@@ -1,1 +1,72 @@
-<p>dashboard works 1!</p>
+<div class="task-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+  <mat-card
+    class="task-card bg-white shadow-md rounded-2xl hover:shadow-lg transition-all"
+    *ngFor="let task of listOfTask"
+  >
+    <div class="task-details p-4 space-y-3">
+      <h2 class="task-name text-xl font-semibold text-gray-800">
+        {{ task.title }}
+      </h2>
+      <p class="task-description text-sm text-gray-600">
+        {{ task.description }}
+      </p>
+      <mat-divider></mat-divider>
+
+      <div class="task-info mt-2 space-y-2">
+        <div class="info-row flex justify-between text-sm">
+          <span class="info-label font-medium text-gray-700">Due Date:</span>
+          <span class="info-value text-gray-900">
+            {{ task.dueDate | date: "MMM d, y" }}
+          </span>
+        </div>
+        <div class="info-row flex justify-between text-sm">
+          <span class="info-label font-medium text-gray-700">Employee:</span>
+          <span class="info-value text-gray-900">
+            {{ task.employeeName }}
+          </span>
+        </div>
+        <div class="info-row flex justify-between text-sm">
+          <span class="info-label font-medium text-gray-700">Priority:</span>
+          <span class="info-value text-gray-900">
+            {{ task.priority }}
+          </span>
+        </div>
+        <div class="info-row flex justify-between text-sm">
+          <span class="info-label font-medium text-gray-700">Status:</span>
+          <span class="info-value text-gray-900">
+            {{ task.taskStatus }}
+          </span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="actions flex items-center justify-end space-x-2 mt-2">
+        <button
+          mat-icon-button
+          color="primary"
+          class="update-button p-2 rounded-full hover:bg-blue-100 transition duration-200"
+          [matMenuTriggerFor]="statusMenu"
+        >
+          <mat-icon class="text-blue-600">edit</mat-icon>
+        </button>
+
+        <mat-menu #statusMenu="matMenu" class="bg-white rounded-lg shadow-md">
+          <button
+            mat-menu-item
+            (click)="updateStatus(task.id, 'INPROGRESS')"
+            class="hover:bg-blue-50 text-sm px-4 py-2"
+          >
+            INPROGRESS
+          </button>
+          <button
+            mat-menu-item
+            (click)="updateStatus(task.id, 'COMPLETED')"
+            class="hover:bg-green-50 text-sm px-4 py-2"
+          >
+            COMPLETED
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-card>
+</div>
